@@ -1,13 +1,14 @@
 import {
   InterfaceNuevaCarta,
   InterfaceOriginalCarta,
-  // arrayOriginalCartas,
   cartasArrayOriginal,
+  tablero,
 } from "./modelo";
 
 // This load the function before of the HTML
 document.addEventListener("DOMContentLoaded", () => {
-  pintarTablero(cartasArrayOriginal);
+  pintarTablero(barajarCartas(cartasArrayOriginal));
+  console.log(tablero.estadoPartida);
 });
 
 // This function is to create the container
@@ -26,8 +27,6 @@ const barajarCartas = (cartasArrayOriginal: InterfaceNuevaCarta[]) => {
   }
   return arrayCopy;
 };
-// Ese console.log es solo para saber que funciona barajar cartas
-console.log(barajarCartas(cartasArrayOriginal));
 
 // To paint the board
 const pintarTablero = (listaAnimales: InterfaceOriginalCarta[]): void => {
@@ -43,21 +42,24 @@ const pintarTablero = (listaAnimales: InterfaceOriginalCarta[]): void => {
       divAnimal.className = "grid-item";
       divAnimal.id = `${index}`;
       crearDivAnimales.appendChild(divAnimal);
-      //Asignar el evento de click
-      divAnimal.addEventListener("click", () => {
-        divAnimal.innerHTML = `<img src="${index.imagen}"/>`;
-      });
+      // Botón iniciar partida
+      const botonIniciar = document.getElementById("iniciarPartidaButton");
+      if (botonIniciar) {
+        botonIniciar.addEventListener("click", () => {
+          // Borrar si están pintadas las cartas
+          divAnimal.innerHTML = " ";
+          tablero.estadoPartida = "CeroCartasLevantadas";
+          console.log(tablero.estadoPartida);
+          //Asignar el evento de click
+          divAnimal.addEventListener("click", () => {
+            divAnimal.innerHTML = `<img src="${index.imagen}"/>`;
+          });
+        });
+        // Con este console.log veo el array que se está pintando
+        // console.log(index);
+      }
     });
   } else {
     console.error("No se encontró elemento");
   }
 };
-
-// Botón iniciar partida
-const botonIniciar = document.getElementById("iniciarPartidaButton");
-
-if (botonIniciar) {
-  botonIniciar.addEventListener("click", () => {
-    pintarTablero;
-  });
-}

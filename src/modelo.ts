@@ -6,6 +6,27 @@ export interface InterfaceNuevaCarta {
   encontrada: boolean;
 }
 
+export interface Tablero {
+  cartasDetalle: InterfaceNuevaCarta[];
+  estadoPartida: EstadoPartida;
+  indiceCartaVolteadaA?: number;
+  indiceCartaVolteadaB?: number;
+}
+
+type EstadoPartida =
+  | "PartidaNoIniciada"
+  | "CeroCartasLevantadas"
+  | "UnaCartaLevantada"
+  | "DosCartasLevantadas"
+  | "PartidaCompleta";
+
+const crearTableroInicial = (): Tablero => {
+  return {
+    cartasDetalle: cartasArrayOriginal,
+    estadoPartida: "PartidaNoIniciada",
+  };
+};
+
 // Esta costante es la que hace la equivalencia entre el array original y el nuevo que queremos crear
 const crearCartaInicial = (
   InterfaceNuevaCarta: InterfaceOriginalCarta
@@ -68,3 +89,5 @@ export const arrayOriginalCartas: InterfaceOriginalCarta[] = [
 // Conservar el array original
 export let cartasArrayOriginal: InterfaceNuevaCarta[] =
   crearColeccionCartasInicial(arrayOriginalCartas);
+
+export let tablero: Tablero = crearTableroInicial();
