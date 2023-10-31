@@ -1,8 +1,13 @@
-import { arrayOriginalCartas, InterfaceOriginalCarta } from "./modelo";
+import {
+  InterfaceNuevaCarta,
+  InterfaceOriginalCarta,
+  // arrayOriginalCartas,
+  cartasArrayOriginal,
+} from "./modelo";
 
 // This load the function before of the HTML
 document.addEventListener("DOMContentLoaded", () => {
-  pintarTablero(arrayOriginalCartas);
+  pintarTablero(cartasArrayOriginal);
 });
 
 // This function is to create the container
@@ -12,6 +17,17 @@ const crearContenedor = (nombreClase: string): HTMLDivElement => {
   listaAnimales.id = nombreClase;
   return listaAnimales;
 };
+
+const barajarCartas = (cartasArrayOriginal: InterfaceNuevaCarta[]) => {
+  let arrayCopy = [...cartasArrayOriginal];
+  for (let i = arrayCopy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]];
+  }
+  return arrayCopy;
+};
+// Ese console.log es solo para saber que funciona barajar cartas
+console.log(barajarCartas(cartasArrayOriginal));
 
 // To paint the board
 const pintarTablero = (listaAnimales: InterfaceOriginalCarta[]): void => {
@@ -36,3 +52,12 @@ const pintarTablero = (listaAnimales: InterfaceOriginalCarta[]): void => {
     console.error("No se encontró elemento");
   }
 };
+
+// Botón iniciar partida
+const botonIniciar = document.getElementById("iniciarPartidaButton");
+
+if (botonIniciar) {
+  botonIniciar.addEventListener("click", () => {
+    pintarTablero;
+  });
+}

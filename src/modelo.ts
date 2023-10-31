@@ -6,7 +6,7 @@ export interface InterfaceNuevaCarta {
   encontrada: boolean;
 }
 
-// Esta costante es la que hace la equivalencia entre el array original y el nuevo que quremos crear
+// Esta costante es la que hace la equivalencia entre el array original y el nuevo que queremos crear
 const crearCartaInicial = (
   InterfaceNuevaCarta: InterfaceOriginalCarta
 ): InterfaceNuevaCarta => {
@@ -65,5 +65,6 @@ export const arrayOriginalCartas: InterfaceOriginalCarta[] = [
   },
 ];
 
-let cartas: InterfaceNuevaCarta[] =
+// Conservar el array original
+export let cartasArrayOriginal: InterfaceNuevaCarta[] =
   crearColeccionCartasInicial(arrayOriginalCartas);
