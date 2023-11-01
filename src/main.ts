@@ -55,33 +55,35 @@ const pintarTablero = (listaAnimales: InterfaceOriginalCarta[]): void => {
             if (tablero.estadoPartida === "CeroCartasLevantadas") {
               divAnimal.innerHTML = `<img src="${index.imagen}"/>`;
               tablero.estadoPartida = "UnaCartaLevantada";
-              // console.log(tablero.estadoPartida);
               tablero.indiceCartaVolteadaA = index.idFoto;
-              // console.log(tablero.indiceCartaVolteadaA);
             } else {
-              divAnimal.innerHTML = `<img src="${index.imagen}"/>`;
-              tablero.estadoPartida = "DosCartasLevantadas";
-              // console.log(tablero.estadoPartida);
+              // tablero.indiceCartaVolteadaA = index.idFoto;
               tablero.indiceCartaVolteadaB = index.idFoto;
-              console.log(tablero.indiceCartaVolteadaB);
+              divAnimal.innerHTML = `<img src="${index.imagen}"/>`;
               const indiceCartaA = tablero.indiceCartaVolteadaA;
               const indiceCartaB = tablero.indiceCartaVolteadaB;
               if (indiceCartaA === indiceCartaB) {
-                console.log("son pareja");
-                tablero.cartasDetalle[indiceCartaA].encontrada == true;
-                tablero.cartasDetalle[indiceCartaB].encontrada == true;
+                console.log("SON PAREJA");
+                tablero.estadoPartida = "CeroCartasLevantadas";
+                tablero.cartasDetalle[indiceCartaA].encontrada = true;
+                tablero.cartasDetalle[indiceCartaB].encontrada = true;
                 console.log(index);
               } else {
-                console.log("NO SON");
+                console.log("NO SON PAREJA");
                 tablero.estadoPartida = "CeroCartasLevantadas";
-                if (tablero.cartasDetalle[indiceCartaA].encontrada == false) {
+                if (
+                  // tablero.cartasDetalle[indiceCartaA].encontrada === false &&
+                  tablero.cartasDetalle[indiceCartaB].encontrada === false
+                ) {
+                  console.log("Manolo");
+                  // divAnimal.innerHTML = " ";
                 }
               }
             }
           });
         });
-        // Con este console.log veo el array que se está pintando
-        console.log(index);
+        // // Con este console.log veo el array que se está pintando
+        // console.log(index);
       }
     });
   } else {
