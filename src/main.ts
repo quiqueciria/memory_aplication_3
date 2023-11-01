@@ -47,16 +47,41 @@ const pintarTablero = (listaAnimales: InterfaceOriginalCarta[]): void => {
       if (botonIniciar) {
         botonIniciar.addEventListener("click", () => {
           // Borrar si están pintadas las cartas
-          divAnimal.innerHTML = " ";
           tablero.estadoPartida = "CeroCartasLevantadas";
-          console.log(tablero.estadoPartida);
+          divAnimal.innerHTML = " ";
+          // console.log(tablero.estadoPartida);
           //Asignar el evento de click
           divAnimal.addEventListener("click", () => {
-            divAnimal.innerHTML = `<img src="${index.imagen}"/>`;
+            if (tablero.estadoPartida === "CeroCartasLevantadas") {
+              divAnimal.innerHTML = `<img src="${index.imagen}"/>`;
+              tablero.estadoPartida = "UnaCartaLevantada";
+              // console.log(tablero.estadoPartida);
+              tablero.indiceCartaVolteadaA = index.idFoto;
+              // console.log(tablero.indiceCartaVolteadaA);
+            } else {
+              divAnimal.innerHTML = `<img src="${index.imagen}"/>`;
+              tablero.estadoPartida = "DosCartasLevantadas";
+              // console.log(tablero.estadoPartida);
+              tablero.indiceCartaVolteadaB = index.idFoto;
+              console.log(tablero.indiceCartaVolteadaB);
+              const indiceCartaA = tablero.indiceCartaVolteadaA;
+              const indiceCartaB = tablero.indiceCartaVolteadaB;
+              if (indiceCartaA === indiceCartaB) {
+                console.log("son pareja");
+                tablero.cartasDetalle[indiceCartaA].encontrada == true;
+                tablero.cartasDetalle[indiceCartaB].encontrada == true;
+                console.log(index);
+              } else {
+                console.log("NO SON");
+                tablero.estadoPartida = "CeroCartasLevantadas";
+                if (tablero.cartasDetalle[indiceCartaA].encontrada == false) {
+                }
+              }
+            }
           });
         });
         // Con este console.log veo el array que se está pintando
-        // console.log(index);
+        console.log(index);
       }
     });
   } else {
